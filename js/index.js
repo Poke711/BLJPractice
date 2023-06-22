@@ -1,5 +1,8 @@
 const clickArea = document.getElementsByClassName('click-area')[0];
 const framesclickArea = document.getElementsByClassName('frames-click-area')[0];
+const main = document.getElementById('main');
+/* set screen size to prevent overflow*/
+main.style.maxHeight = screen.height + "px";
 
 const fastMash = [1,4,6,8,11]
 let failedAttempt = false;
@@ -43,15 +46,17 @@ function resetFrame(){
     setFPSCounter(1);
 }
 function setFPSCounter(num){
-    document.getElementsByClassName('fpscounter')[0].innerHTML =num;
+    document.getElementsByClassName('fpscounter')[0].innerHTML =`Frame: ${num}`;
 }
 function showFrameClickedOn(frame){
     //make a div in frame-click-area with the number of the frame
     let div = document.createElement('div');
     div.innerHTML = frame;
-    div.classList.add('frame');
+    div.classList.add('frameText');
+    div.classList.add('border');
+    div.classList.add('border-primary');
     if (fastMash.includes(frame) && !failedAttempt){
-        div.classList.add('correct-frame');
+        div.classList.add('text-success');
     }
     framesclickArea.appendChild(div);
 }

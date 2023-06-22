@@ -13,6 +13,10 @@ let frameRate = 30;
 let clicks = [];
 let intervalID = null;
 
+let audioEnabled = false;
+let fastAudio = true; //146 speed audio
+let audioCurrentlyPlaying = false;
+
 function updateFrame() {
     //Display the current frame at the top
     setFPSCounter(frame);
@@ -45,6 +49,7 @@ function resetFrame(){
     frame=0;
     failedAttempt = false;
     framesclickArea.innerHTML = "";
+    audioCurrentlyPlaying = false;
     setFPSCounter(1);
 }
 function setFPSCounter(num){
@@ -70,6 +75,10 @@ function showFrameClickedOn(frame){
 }
 
 function bljClick() {
+    //Play the blj audio
+    if(!audioCurrentlyPlaying){
+        playAudio();
+    }
     // Push the current frame to the clicks array
     clicks.push(frame);
 
@@ -82,15 +91,49 @@ function bljClick() {
 function changeSettings(){
     resetFrameNum = document.getElementById('resetSetting').value;
     frameRate = document.getElementById('fpsSetting').value;
+    audioCheckbox = document.getElementById('audioSetting')
+    setAudio();
     console.log(`new frameRate is ${frameRate} and resetFrameNum is ${resetFrameNum}`)
-    
 }
-function hideMessage(){
-    document.getElementById('message').classList.add('d-none');
-    localStorage.setItem('message',true);
+function setAudio(){
+    audioFramerate = document.getElementById('audioSetting')
+    audioFramerateLabel = document.getElementById('audioSettingLabel')
+    audio146= document.getElementById('frame146')
+    audio148= document.getElementById('frame148')
+    console.log(audioFramerate.checked)
+    if (audioFramerate.checked){
+        audioEnabled = true;
+        audioFramerateLabel.classList.remove('btn-outline-danger');
+        audioFramerateLabel.classList.add('btn-outline-success');
+        audioFramerateLabel.innerHTML = "Audio On"
+    }
+    else{
+        audioEnabled = false;
+        audioFramerateLabel.classList.remove('btn-outline-success');
+        audioFramerateLabel.classList.add('btn-outline-danger');
+        audioFramerateLabel.innerHTML = "Audio Off"
+    }
+    if (audio146.checked){
+        fastAudio = true;
+    }
+    else{
+        fastAudio = false;
+    }
+
 }
-if (localStorage.getItem('message')){
-    document.getElementById('message').classList.add('d-none');
+function playAudio(){
+    audioCurrentlyPlaying = true;
+    let audio;
+    if (!audioEnabled){
+        console.log("audio is disabled")
+        return;
+    }
+    if(fastAudio){
+        audio = new Audio('assets/146speed.wav');
+    }
+    else{
+        audio = new Audio('assets/148speed.wav');
+    }
+    audio.play();
 }
-document.getElementById('message').addEventListener('click', hideMessage,false);    
 clickArea.addEventListener('click', bljClick,false);

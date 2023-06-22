@@ -8,35 +8,79 @@
     <link rel="stylesheet" href="css/index.css">
 </head>
 <body id="main" class="bg-dark container-fluid"style="height: 100vh;">
-    <div id="message" class="loadText bg-secondary text-light bg-opacity-50 initText d-flex justify-content-center align-items-center text-light fs-2 text-center">
-        This tool is still under development.
-        <br>
-        Only mouse click is supported at the moment
-        <br>
-        *Click to remove this message.
-    </div>
+
     <div class="topbar bg-dark">
         <div class="fpscounter text-light">Frame: 1</div>
-        <h1 class="title text-light justify-content-center d-flex">BLJ Practice</h1>
+        <h1 class="title text-light justify-content-center d-flex"style="user-select: none;">BLJ Practice</h1>
     </div>
     <div class="click-area bg-dark d-flex border border-dark-subtle justify-content-center align-items-center h-75">
         <div class="frames-click-area d-flex p-2">
             <!--This will add the divs of frames that were clicked-->
         </div>
     </div>
+
+
+
+
     <div class="settings">
-        <div class="settings-title text-light d-flex justify-content-center">Settings</div>
+        <div class="settings-title text-light d-flex justify-content-center " style="user-select: none;">Settings</div>
         <div class="setting-inputs d-flex justify-content-center">
+            <!-- Set framerate input-->
             <div class="form-floating mx-3">
-                <input type="number" class="form-control" id="fpsSetting" placeholder="Frame Rate" value="30">
+                <input type="number" class="form-control" id="fpsSetting" placeholder="Frame Rate" value="30" onchange="changeSettings()">
                 <label for="fps">Frame Rate</label>
             </div>
+            <!-- Reset At frame x input-->
             <div class="form-floating mx-3">
-                <input type="number" class="form-control" id="resetSetting" placeholder="Reset at frame x" value="30">
+                <input type="number" class="form-control" id="resetSetting" placeholder="Reset at frame x" value="30" onchange="changeSettings()">
                 <label for="reset">Reset at frame</label>
             </div>
-            <button type="button" class="btn btn-primary" id="start" onclick="changeSettings()">Submit Changes</button>
+            <!-- Input to choose between two different options of mashing speed audio (1,4,6) and (1,4,8)-->
+            <div class="btn-group btn-group-sm mx-3 d-flex flex-column" role="group" aria-label="Basic radio toggle button group">
+                <label class="d-flex text-light align-items-center justify-content-center"> Choose Frame Audio</label>
+                <div id="audioFramerat">
+
+                    <input type="radio" class="btn-check" name="btnradio" id="frame146" autocomplete="off" checked onchange="changeSettings()">
+                    <label class="btn btn-outline-primary" for="frame146">F1, F4, F6</label>
+                    
+                    <input type="radio" class="btn-check" name="btnradio" id="frame148" autocomplete="off" onchange="changeSettings()">
+                    <label class="btn btn-outline-primary" for="frame148">F1, F4, F8</label>
+                </div>
+            </div>
+
+            <!-- Checkbox to enable or disable audio-->
+            <input type="checkbox" class="btn-check" id="audioSetting" autocomplete="off" onchange="changeSettings()">
+            <label class="btn btn-outline-danger" for="audioSetting" id="audioSettingLabel">Audio Off</label>
+          
+            <!--Readme Modal-->
+            <button type="button" class="btn btn-primary mx-3" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                Info
+            </button>
+            
+            <!-- Modal -->
+            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Readme</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                    This BLJ practice tool is made for Super Mario 64 speedruns and is currently under development
+                    <br>
+                    Created by Poke711 (Poke)
+                    <br>
+                    Follow me at <a target="_blank" href="https://www.twitch.tv/poke711_">Twitch</a> and <a href="https://twitter.com/Poke711_">Twitter</a>
+                    </div>
+                    <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    </div>
+                </div>
+                </div>
+            </div>
+            
         </div>
+        
     </div>
 <script src="js/index.js"></script>
 

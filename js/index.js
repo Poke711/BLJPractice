@@ -1,6 +1,7 @@
 const clickArea = document.getElementsByClassName('click-area')[0];
 const framesclickArea = document.getElementsByClassName('frames-click-area')[0];
 const main = document.getElementById('main');
+
 /* set screen size to prevent overflow*/
 main.style.maxHeight = screen.height + "px";
 
@@ -8,6 +9,7 @@ const fastMash = [1,4,6,8,11]
 let failedAttempt = false;
 let frame = 1;
 let resetFrameNum = 30;
+let frameRate = 30;
 let clicks = [];
 let intervalID = null;
 
@@ -52,11 +54,17 @@ function showFrameClickedOn(frame){
     //make a div in frame-click-area with the number of the frame
     let div = document.createElement('div');
     div.innerHTML = frame;
-    div.classList.add('frameText');
-    div.classList.add('border');
-    div.classList.add('border-primary');
+    let classListFrame = ["frameText","border","border-secondary","rounded","m-2"];
+    div.classList.add(...classListFrame);
+    div.style = "--bs-border-opacity: .5;"
     if (fastMash.includes(frame) && !failedAttempt){
         div.classList.add('text-success');
+    }
+    else if (frame> 11){
+        div.classList.add('text-info');
+    }
+    else{
+        div.classList.add('text-danger');
     }
     framesclickArea.appendChild(div);
 }
@@ -67,8 +75,14 @@ function bljClick() {
 
     // If the interval is not set, start it and set the frame rate to 30 fps
     if (intervalID === null) {
-        intervalID = setInterval(updateFrame, 1000 / 30);
+        intervalID = setInterval(updateFrame, 1000 / frameRate);
     }
 
+}
+function changeSettings(){
+    resetFrameNum = document.getElementById('resetSetting').value;
+    frameRate = document.getElementById('fpsSetting').value;
+    console.log(`new frameRate is ${frameRate} and resetFrameNum is ${resetFrameNum}`)
+    
 }
 clickArea.addEventListener('click', bljClick,false);

@@ -7,14 +7,28 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="css/index.css">
 </head>
-<body id="main" class="bg-dark border border-primary container-fluid"style="height: 100vh;">
-    <div class="topbar bg-dark border border-primary">
+<body id="main" class="bg-dark container-fluid"style="height: 100vh;">
+    <div class="topbar bg-dark">
         <div class="fpscounter text-light">Frame: 1</div>
         <h1 class="title text-light justify-content-center d-flex">BLJ Practice</h1>
     </div>
-    <div class="click-area bg-dark d-flex border border-primary justify-content-center align-items-center h-75">
-        <div class="frames-click-area d-flex p-2 border border-secondary">
+    <div class="click-area bg-dark d-flex border border-dark-subtle justify-content-center align-items-center h-75">
+        <div class="frames-click-area d-flex p-2">
             <!--This will add the divs of frames that were clicked-->
+        </div>
+    </div>
+    <div class="settings">
+        <div class="settings-title text-light d-flex justify-content-center">Settings</div>
+        <div class="setting-inputs d-flex justify-content-center">
+            <div class="form-floating mx-3">
+                <input type="number" class="form-control" id="fpsSetting" placeholder="Frame Rate" value="30">
+                <label for="fps">Frame Rate</label>
+            </div>
+            <div class="form-floating mx-3">
+                <input type="number" class="form-control" id="resetSetting" placeholder="Reset at frame x" value="30">
+                <label for="reset">Reset at frame</label>
+            </div>
+            <button type="button" class="btn btn-primary" id="start" onclick="changeSettings()">Submit Changes</button>
         </div>
     </div>
 <script src="js/index.js"></script>

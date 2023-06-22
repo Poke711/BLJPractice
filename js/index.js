@@ -85,4 +85,12 @@ function changeSettings(){
     console.log(`new frameRate is ${frameRate} and resetFrameNum is ${resetFrameNum}`)
     
 }
+function hideMessage(){
+    document.getElementById('message').classList.add('d-none');
+    localStorage.setItem('message',true);
+}
+if (localStorage.getItem('message')){
+    document.getElementById('message').classList.add('d-none');
+}
+document.getElementById('message').addEventListener('click', hideMessage,false);    
 clickArea.addEventListener('click', bljClick,false);
